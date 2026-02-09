@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1,
+        "foto": "https://i.imgur.com/LsYxmfB.jpeg",
+        "nombre": "Putumayo Stay",
+        "descripcion": "Plataforma de gestión hotelera diseñada para optimizar la administración y las reservas de los usuarios.",
+        "tecnologias": [
+            "React",
+            "Node",
+            "Express",
+            "MySQL"
+        ],
+        "url": "https://github.com/Neonwaac/PutumayoStay.git",
+        "github": "https://github.com/Neonwaac/PutumayoStay.git"
+    },
+    {
+        "id": 2,
+        "foto": "https://i.imgur.com/CAfHb6a.png",
+        "nombre": "8192",
+        "descripcion": "Juego de lógica y estrategia cuyo objetivo es llegar al valor de casilla 8192 combinando valores.",
+        "tecnologias": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ],
+        "url": "https://8192-tawny.vercel.app",
+        "github": "https://github.com/Neonwaac/8192"
+    },
+    {
+        "id": 10,
+        "foto": "https://i.imgur.com/Ks9CQyH.jpeg",
+        "nombre": "Voluntariado",
+        "descripcion": "Plataforma integral para la gestión y centralización de eventos de voluntariado, que permite a creadores publicar voluntariados, a los voluntarios postularse y registrar su asistencia, y a los administradores verificar la calidad y validez de las actividades mediante procesos automatizados. La aplicación integra verificación documental, validación de certificados, análisis de sentimientos en comentarios y control de roles, facilitando una gestión transparente, confiable y escalable de programas de voluntariado.",
+        "tecnologias": [
+            "React",
+            "NestJS",
+            "FastAPI",
+            "MySQL"
+        ],
+        "url": "https://github.com/Plataforma-Voluntariado/Voluntariado.git",
+        "github": "https://github.com/Plataforma-Voluntariado/Voluntariado.git"
+    },
+    {
+        "id": 4,
+        "foto": "https://i.imgur.com/zuxn6uv.png",
+        "nombre": "PokeGames",
+        "descripcion": "Aplicación móvil creada con Flutter inspirada en el universo Pokémon.El juego se conecta a la PokéAPI para obtener datos en tiempo real y ofrece distintos modos de trivia y puntuación.",
+        "tecnologias": [
+            "Flutter",
+            "Dart",
+            "Firebase",
+            "PokeAPI"
+        ],
+        "url": "https://github.com/Neonwaac/PokeGame.git",
+        "github": "https://github.com/Neonwaac/PokeGame.git"
+    },
+    {
+        "id": 7,
+        "foto": "https://i.imgur.com/zffIpZO.jpeg",
+        "nombre": "CareVet",
+        "descripcion": "Sistema enfocado en la gestión eficiente del historial de vacunación y cuidado de mascotas.",
+        "tecnologias": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ],
+        "url": "https://github.com/Neonwaac/GestionDeVacunas.git",
+        "github": "https://github.com/Neonwaac/GestionDeVacunas.git"
+    },
+    {
+        "id": 8,
+        "foto": "https://i.imgur.com/EclMguO.png",
+        "nombre": "Buscaminas",
+        "descripcion": "Versión digital de un clásico, donde el jugador usa lógica para evitar minas ocultas.",
+        "tecnologias": [
+            "HTML",
+            "CSS",
+            "JavaScript"
+        ],
+        "url": "https://minesweeper-chi-drab.vercel.app",
+        "github": "https://github.com/Neonwaac/Minesweeper"
+    }
+]

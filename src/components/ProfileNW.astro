@@ -1,0 +1,253 @@
+<div class="profile-nw">
+  <div class="profile-nw-top">
+    <div class="tech-border"></div>
+    <h1>Perfil de Creador</h1>
+  </div>
+  <div class="profile-nw-middle">
+    <div class="profile-image-container">
+      <img src="../src/assets/neonwaac.png" alt="NEONWAAC" />
+      <div class="profile-glow"></div>
+    </div>
+    <h3>NEONWAAC</h3>
+    <p>
+      Creando contenido de programación y tecnología para todos los niveles. 
+      <span class="tech-stack">JavaScript, CSS, HTML, C++, C#, Python</span>
+    </p>
+  </div>
+  <div class="profile-nw-bottom">
+    <div class="social-icons">
+      <img src="../src/assets/github.ico" alt="GitHub" />
+      <img src="../src/assets/linkedin.ico" alt="LinkedIn" />
+      <img src="../src/assets/twitter.ico" alt="Twitter" />
+      <img src="../src/assets/instagram.ico" alt="Instagram" />
+      <img src="../src/assets/facebook.ico" alt="Facebook" />
+      <img src="../src/assets/youtube.ico" alt="YouTube" />
+      <img src="../src/assets/social-media.ico" alt="Social Media" />
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes borderPulse {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes glowPulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 0.9; }
+    100% { opacity: 0.6; }
+  }
+  
+  @keyframes iconHover {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+  }
+  
+  .profile-nw {
+    width: 30%;
+    min-width: 350px;
+    height: fit-content; /* Evita que se estire al alto del contenedor padre */
+    align-self: center; /* Centra verticalmente en el flex padre */
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    position: relative;
+    transform: perspective(1000px) rotateX(3deg);
+    transition: transform 0.5s ease;
+    border-radius: 22px; /* Añadido para asegurar que el contenido respete el borde */
+    background: #001440; /* Fondo base para cubrir cualquier hueco */
+    
+    &:hover {
+      transform: perspective(1000px) rotateX(0deg);
+    }
+    
+    &::before {
+      content: "";
+      position: absolute;
+      /* Ajuste del borde: -2px en lugar de -4px para que sea más fino y uniforme */
+      inset: -3px; 
+      background: linear-gradient(90deg, var(--nw-color-morado), var(--nw-color-morado), var(--nw-color-rojo));
+      background-size: 200% 200%;
+      animation: borderPulse 3s linear infinite;
+      border-radius: 24px; /* Ligeramente mayor que el contenedor para envolverlo */
+      z-index: -1;
+    }
+  }
+  
+  .profile-nw-top {
+    width: 100%;
+    background: linear-gradient(to bottom, #0a2472, #001440);
+    border-radius: 20px 20px 0px 0px;
+    position: relative;
+    overflow: hidden;
+    padding: 15px 0;
+    
+    h1 {
+      width: 100%;
+      text-align: center;
+      font-size: 2rem;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 10px rgba(102, 204, 255, 0.7);
+    }
+  }
+  
+  .tech-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(90deg, rgba(230, 25, 25, 0.1) 0px, rgba(230, 25, 25, 0.1) 1px, transparent 1px, transparent 10px),
+      repeating-linear-gradient(0deg, rgba(230, 25, 25, 0.1) 0px, rgba(230, 25, 25, 0.1) 1px, transparent 1px, transparent 10px);
+    opacity: 0.3;
+    z-index: 1;
+  }
+  
+  .profile-nw-middle {
+    width: 100%;
+    background: linear-gradient(to bottom, #111214, #0a0b0d);
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    
+    .profile-image-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+    
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      position: relative;
+      z-index: 2;
+      border: 3px solid rgba(230, 25, 25, 0.7);
+      box-shadow: 
+        0 0 20px rgba(230, 25, 25, 0.5),
+        0 0 40px rgba(0, 0, 0, 0.8);
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    
+    .profile-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(102, 204, 255, 0.4) 0%, rgba(230, 25, 25, 0.2) 50%, transparent 70%);
+      filter: blur(10px);
+      z-index: 1;
+      animation: glowPulse 4s infinite ease-in-out;
+    }
+    
+    h3 {
+      width: 100%;
+      text-align: center;
+      font-size: 2.2rem;
+      margin: 10px 0;
+      background: linear-gradient(90deg, #ffffff, #66ccff, #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 5px rgba(102, 204, 255, 0.3);
+    }
+    
+    p {
+      width: 100%;
+      font-size: 1.1rem;
+      text-align: center;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .tech-stack {
+      display: block;
+      margin-top: 10px;
+      font-family: monospace;
+      color: #e61919;
+      text-shadow: 0 0 5px rgba(230, 25, 25, 0.5);
+    }
+  }
+  
+  .profile-nw-bottom {
+    width: 100%;
+    border-radius: 0px 0px 20px 20px;
+    background: linear-gradient(to top, #0a2472, #001440);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #e61919, transparent);
+    }
+    
+    .social-icons {
+      display: flex;
+      justify-content: space-around;
+      gap: 10px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    img {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 3px rgba(102, 204, 255, 0.5));
+      
+      &:hover {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 8px rgba(230, 25, 25, 0.8));
+        animation: iconHover 1s infinite ease-in-out;
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .profile-nw {
+      min-width: 300px;
+    }
+    
+    .profile-nw-middle {
+      padding: 30px 20px;
+      
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .profile-image-container {
+        width: 150px;
+        height: 150px;
+      }
+      
+      h3 {
+        font-size: 1.8rem;
+      }
+    }
+  }
+</style>

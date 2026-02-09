@@ -1,0 +1,323 @@
+---
+import tList from '../assets/technologies/technologies.json'
+---
+
+<div class="technologies-container" id="technologies">
+  <div class="tech-header">
+    <div class="tech-lines"></div>
+    <h1>Tecnologías</h1>
+    <div class="tech-accent"></div>
+  </div>
+  
+  <div class="technologies-carousel">
+    <div class="carousel-overlay">
+      <div class="tech-corner top-left"></div>
+      <div class="tech-corner top-right"></div>
+      <div class="tech-corner bottom-left"></div>
+      <div class="tech-corner bottom-right"></div>
+    </div>
+    
+    <div class="slide-track">
+      {
+        tList.map(tech => (
+          <div class="slide">
+            <div class="slide-content">
+              <img src={tech.url || "/placeholder.svg"} height="100" width="250" alt={tech.nombre} />
+              <div class="tech-name">{tech.nombre}</div>
+            </div>
+          </div>
+        ))  
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-250px * 7)); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 10px rgba(230, 25, 25, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 20px rgba(102, 204, 255, 0.7);
+    }
+  }
+  
+  @keyframes cornerGlow {
+    0%, 100% {
+      border-color: rgba(230, 25, 25, 0.8);
+      box-shadow: 0 0 10px rgba(230, 25, 25, 0.5);
+    }
+    50% {
+      border-color: rgba(102, 204, 255, 0.8);
+      box-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
+    }
+  }
+  
+  @keyframes accentPulse {
+    0% { width: 0; opacity: 1; }
+    50% { width: 100px; opacity: 0.8; }
+    100% { width: 0; opacity: 1; }
+  }
+  
+  .technologies-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 0px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 20, 64, 0.8) 0%, rgba(10, 36, 114, 0.8) 100%);
+  }
+  
+  .tech-header {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .tech-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(90deg, rgba(230, 25, 25, 0.1) 0px, rgba(230, 25, 25, 0.1) 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(0deg, rgba(230, 25, 25, 0.1) 0px, rgba(230, 25, 25, 0.1) 1px, transparent 1px, transparent 20px);
+    opacity: 0.3;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .tech-accent {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e61919, transparent);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: accentPulse 4s infinite ease-in-out;
+  }
+  
+  .technologies-container h1 {
+    width: auto;
+    text-align: center;
+    color: transparent;
+    background: linear-gradient(90deg, #ffffff, #66ccff, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 0;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+    text-shadow: 0 0 15px rgba(102, 204, 255, 0.3);
+    
+    &::after {
+      content: "2099";
+      position: absolute;
+      top: -15px;
+      right: 0;
+      font-size: 1rem;
+      color: #e61919;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px rgba(230, 25, 25, 0.8);
+    }
+  }
+
+  .technologies-carousel {
+    background: rgba(0, 10, 30, 0.7) !important;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, .3);
+    height: 150px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 90%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 204, 255, 0.2);
+    animation: pulse 4s infinite ease-in-out;
+  }
+  
+  .carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+  
+  .tech-corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(230, 25, 25, 0.8);
+    box-shadow: 0 0 10px rgba(230, 25, 25, 0.5);
+    animation: cornerGlow 3s infinite ease-in-out;
+    
+    &.top-left {
+      top: 10px;
+      left: 10px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    &.top-right {
+      top: 10px;
+      right: 10px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    &.bottom-left {
+      bottom: 10px;
+      left: 10px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    &.bottom-right {
+      bottom: 10px;
+      right: 10px;
+      border-left: none;
+      border-top: none;
+    }
+  }
+
+  .technologies-carousel::before,
+  .technologies-carousel::after {
+    background: linear-gradient(to right, rgba(0, 10, 30, 0.9) 0%, rgba(0, 10, 30, 0) 100%);
+    content: "";
+    height: 150px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  .technologies-carousel::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  .technologies-carousel::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slide-track {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+    height: 150px;
+    align-items: center;
+  }
+
+  .slide {
+    height: 150px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      .slide-content {
+        transform: translateY(-5px);
+        
+        img {
+          filter: drop-shadow(0 0 10px rgba(102, 204, 255, 0.8));
+        }
+        
+        .tech-name {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+  
+  .slide-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    
+    img {
+      max-height: 70px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 5px rgba(102, 204, 255, 0.3));
+      transition: filter 0.3s ease;
+    }
+    
+    .tech-name {
+      position: absolute;
+      bottom: 10px;
+      color: #e61919;
+      font-size: 12px;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(230, 25, 25, 0.5);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      text-align: center;
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .technologies-container {
+      padding: 40px 0;
+    }
+    
+    .technologies-container h1 {
+      font-size: 2.2rem;
+    }
+    
+    .technologies-carousel {
+      width: 95%;
+      height: 120px;
+    }
+    
+    .technologies-carousel::before,
+    .technologies-carousel::after {
+      height: 120px;
+      width: 100px;
+    }
+    
+    .slide-track {
+      height: 120px;
+    }
+    
+    .slide {
+      height: 120px;
+    }
+    
+    .slide-content img {
+      max-height: 50px;
+    }
+  }
+</style>

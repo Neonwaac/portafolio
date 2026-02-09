@@ -1,0 +1,397 @@
+---
+import languages from "../assets/languages/languages.json"
+---
+
+<div class="languages-container" id="languages">
+  <div class="lang-header">
+    <div class="lang-circuit"></div>
+    <h1>Lenguajes</h1>
+    <div class="lang-underline"></div>
+  </div>
+  
+  <div class="languages-carousel">
+    <div class="carousel-frame">
+      <div class="frame-corner top-left"></div>
+      <div class="frame-corner top-right"></div>
+      <div class="frame-corner bottom-left"></div>
+      <div class="frame-corner bottom-right"></div>
+      <div class="scan-beam"></div>
+    </div>
+    
+    <div class="slide-track">
+      {
+        languages.map(language => (
+          <div class="slide">
+            <div class="slide-inner">
+              <img src={language.url || "/placeholder.svg"} height="100" width="250" alt={language.nombre} />
+              <div class="lang-label">{language.nombre}</div>
+              <div class="hover-glow"></div>
+            </div>
+          </div>
+        ))  
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-250px * 7)); }
+  }
+  
+  @keyframes scanBeam {
+    0% { 
+      left: -10%; 
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% { 
+      left: 110%; 
+      opacity: 0;
+    }
+  }
+  
+  @keyframes frameGlow {
+    0%, 100% {
+      border-color: rgba(102, 204, 255, 0.8);
+      box-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+    }
+    50% {
+      border-color: rgba(230, 25, 25, 0.8);
+      box-shadow: 0 0 15px rgba(230, 25, 25, 0.5);
+    }
+  }
+  
+  @keyframes underlinePulse {
+    0% { transform: scaleX(0.3); opacity: 0.7; }
+    50% { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(0.3); opacity: 0.7; }
+  }
+  
+  @keyframes circuitFlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+  }
+  
+  .languages-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 0px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(10, 36, 114, 0.8) 0%, rgba(0, 20, 64, 0.8) 100%);
+  }
+  
+  .lang-header {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .lang-circuit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(102, 204, 255, 0.1) 20%, 
+      rgba(230, 25, 25, 0.1) 40%, 
+      transparent 60%,
+      rgba(102, 204, 255, 0.1) 80%,
+      transparent 100%);
+    background-size: 200% 100%;
+    animation: circuitFlow 8s linear infinite;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .lang-underline {
+    position: absolute;
+    height: 3px;
+    width: 60%;
+    background: linear-gradient(90deg, transparent, #66ccff, #e61919, #66ccff, transparent);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: underlinePulse 4s infinite ease-in-out;
+  }
+  
+  .languages-container h1 {
+    width: auto;
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin: 0;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 
+      0 0 10px rgba(102, 204, 255, 0.5),
+      0 0 20px rgba(102, 204, 255, 0.3);
+    
+    &::before {
+      content: "<";
+      position: absolute;
+      left: -15px;
+      color: #e61919;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(230, 25, 25, 0.8);
+    }
+    
+    &::after {
+      content: "/>";
+      position: absolute;
+      right: -25px;
+      color: #e61919;
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(230, 25, 25, 0.8);
+    }
+  }
+
+  .languages-carousel {
+    background: rgba(0, 10, 30, 0.5) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+    height: 150px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 90%;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 204, 255, 0.2);
+  }
+  
+  .carousel-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
+  }
+  
+  .frame-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgba(102, 204, 255, 0.8);
+    box-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+    animation: frameGlow 4s infinite ease-in-out;
+    
+    &.top-left {
+      top: 5px;
+      left: 5px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    &.top-right {
+      top: 5px;
+      right: 5px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    &.bottom-left {
+      bottom: 5px;
+      left: 5px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    &.bottom-right {
+      bottom: 5px;
+      right: 5px;
+      border-left: none;
+      border-top: none;
+    }
+  }
+  
+  .scan-beam {
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 10%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(102, 204, 255, 0.2), 
+      rgba(102, 204, 255, 0.5), 
+      rgba(102, 204, 255, 0.2), 
+      transparent);
+    z-index: 2;
+    pointer-events: none;
+    animation: scanBeam 8s infinite ease-in-out;
+  }
+
+  .languages-carousel::before,
+  .languages-carousel::after {
+    background: linear-gradient(to right, rgba(0, 10, 30, 0.9) 0%, rgba(0, 10, 30, 0) 100%);
+    content: "";
+    height: 150px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+  }
+
+  .languages-carousel::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+
+  .languages-carousel::before {
+    left: 0;
+    top: 0;
+  }
+
+  .slide-track {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
+    height: 150px;
+    align-items: center;
+  }
+
+  .slide {
+    height: 150px;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+  }
+  
+  .slide-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+      
+      .hover-glow {
+        opacity: 0.8;
+      }
+      
+      .lang-label {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      
+      img {
+        filter: brightness(1.2) drop-shadow(0 0 8px rgba(230, 25, 25, 0.7));
+      }
+    }
+    
+    img {
+      max-height: 70px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      filter: brightness(1) drop-shadow(0 0 5px rgba(102, 204, 255, 0.3));
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hover-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(230, 25, 25, 0.3) 0%, rgba(102, 204, 255, 0.2) 50%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      filter: blur(10px);
+      z-index: 1;
+    }
+    
+    .lang-label {
+      position: absolute;
+      bottom: 15px;
+      background: rgba(0, 10, 30, 0.7);
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 3px 10px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      z-index: 2;
+      border: 1px solid #e61919;
+      box-shadow: 0 0 5px rgba(230, 25, 25, 0.5);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .languages-container {
+      padding: 40px 0;
+    }
+    
+    .languages-container h1 {
+      font-size: 2.2rem;
+      
+      &::before {
+        left: -10px;
+      }
+      
+      &::after {
+        right: -20px;
+      }
+    }
+    
+    .languages-carousel {
+      width: 95%;
+      height: 120px;
+    }
+    
+    .languages-carousel::before,
+    .languages-carousel::after {
+      height: 120px;
+      width: 100px;
+    }
+    
+    .slide-track {
+      height: 120px;
+    }
+    
+    .slide {
+      height: 120px;
+    }
+    
+    .slide-inner img {
+      max-height: 50px;
+    }
+    
+    .frame-corner {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style>

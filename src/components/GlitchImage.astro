@@ -1,0 +1,326 @@
+---
+// GlitchImage.astro
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  imageSrc: ImageMetadata | string;
+  altText: string;
+  height?: string;
+}
+
+const { imageSrc, altText, height = "500px" } = Astro.props;
+
+// Helper to get URL string for CSS
+const imageUrl = typeof imageSrc === 'string' ? imageSrc : imageSrc.src;
+---
+
+<div class="glitch-container">
+  <div class="glitch">
+    {typeof imageSrc === 'string' ? (
+        <img src={imageSrc || "/placeholder.svg"} alt={altText} />
+    ) : (
+        <Image src={imageSrc} alt={altText} />
+    )}
+    
+    <div class="glitch__layers">
+      <div class="glitch__layer"></div>
+      <div class="glitch__layer"></div>
+      <div class="glitch__layer glitch__layer--color"></div>
+    </div>
+    <div class="aberration-red"></div>
+    <div class="aberration-blue"></div>
+  </div>
+</div>
+
+<style define:vars={{ imageSrc: `url(${imageUrl})`, height }}>
+  .glitch-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+  }
+  
+  .glitch {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    transition: all 0.3s ease;
+    border-radius: 150px;
+  }
+  
+  .glitch:hover {
+    transform: scale(1.02);
+    box-shadow: 
+      0 0 40px rgba(255, 94, 0, 0.5),
+      inset 0 0 30px rgba(255, 0, 0, 0.2);
+  }
+  
+  .glitch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      transparent 0%,
+      rgba(255, 60, 0, 0.1) 50%,
+      transparent 100%
+    );
+    z-index: 25;
+    animation: scan-lines 4s linear infinite;
+    pointer-events: none;
+  }
+  
+  .glitch img {
+    z-index: 20;
+    height: var(--height);
+    max-height: 50vh;
+    width: auto;
+    display: block;
+    object-fit: contain;
+    filter: contrast(1.1) brightness(1.1);
+  }
+  
+  /* Aberración cromática */
+  .aberration-red, 
+  .aberration-blue {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(var(--imageSrc));
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 15;
+  }
+  
+  .aberration-red {
+    filter: blur(1px) hue-rotate(-10deg) saturate(1.5);
+    transform: translate(-3px, 0);
+    animation: aberration-red 3s infinite alternate;
+  }
+  
+  .aberration-blue {
+    filter: blur(1px) hue-rotate(10deg) saturate(1.5);
+    transform: translate(3px, 0);
+    animation: aberration-blue 4s infinite alternate;
+  }
+  
+  @keyframes aberration-red {
+    0%, 100% {
+      transform: translate(-3px, 0);
+      opacity: 0.5;
+    }
+    25% {
+      transform: translate(-4px, 1px);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(-2px, -1px);
+      opacity: 0.4;
+    }
+    75% {
+      transform: translate(-5px, 0);
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes aberration-blue {
+    0%, 100% {
+      transform: translate(3px, 0);
+      opacity: 0.5;
+    }
+    25% {
+      transform: translate(4px, -1px);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(2px, 1px);
+      opacity: 0.4;
+    }
+    75% {
+      transform: translate(5px, 0);
+      opacity: 0.5;
+    }
+  }
+  
+  .glitch__layers {
+    position: absolute;
+    z-index: 22;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .glitch__layer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    background-repeat: ntainrepeat;
+    background-position: center;
+    background-size: cover;
+  }
+  .glitch__layer,
+.aberration-red,
+.aberration-blue {
+  background-image: url('../assets/miguel.png');
+  -webkit-mask-image: url('../assets/miguel.png');
+  mask-image: url('../assets/miguel.png');
+}
+  
+  .glitch__layer:nth-child(1) {
+    animation: glitch-anim-1 3s infinite linear alternate;
+  }
+  
+  .glitch__layer:nth-child(2) {
+    animation: glitch-anim-2 6s -3s infinite linear alternate;
+  }
+  
+  .glitch__layer--color {
+    mix-blend-mode: color-dodge;
+    animation: glitch-anim-flash 1s infinite linear;
+    filter: hue-rotate(90deg) brightness(1.5);
+    opacity: 0.05;
+  }
+  
+  @keyframes scan-lines {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  
+  @keyframes glitch-anim-1 {
+    0% {
+      clip-path: polygon(0 0%, 100% 0%, 100% 5%, 0 5%);
+    }
+    10% {
+      clip-path: polygon(0 15%, 100% 15%, 100% 15%, 0 15%);
+    }
+    20% {
+      clip-path: polygon(0 10%, 100% 10%, 100% 20%, 0 20%);
+    }
+    30% {
+      clip-path: polygon(0 1%, 100% 1%, 100% 2%, 0 2%);
+    }
+    40% {
+      clip-path: polygon(0 35%, 100% 35%, 100% 35%, 0 35%);
+    }
+    50% {
+      clip-path: polygon(0 45%, 100% 45%, 100% 46%, 0 46%);
+    }
+    60% {
+      clip-path: polygon(0 50%, 100% 50%, 100% 70%, 0 70%);
+    }
+    70% {
+      clip-path: polygon(0 70%, 100% 70%, 100% 70%, 0 70%);
+    }
+    80% {
+      clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+    }
+    90% {
+      clip-path: polygon(0 50%, 100% 50%, 100% 55%, 0 55%);
+    }
+    100% {
+      clip-path: polygon(0 60%, 100% 60%, 100% 70%, 0 70%);
+    }
+  }
+  
+  @keyframes glitch-anim-2 {
+    0% {
+      clip-path: polygon(0 15%, 100% 15%, 100% 30%, 0 30%);
+    }
+    15% {
+      clip-path: polygon(0 3%, 100% 3%, 100% 3%, 0 3%);
+    }
+    25% {
+      clip-path: polygon(0 8%, 100% 8%, 100% 20%, 0 20%);
+    }
+    30% {
+      clip-path: polygon(0 20%, 100% 20%, 100% 20%, 0 20%);
+    }
+    45% {
+      clip-path: polygon(0 45%, 100% 45%, 100% 45%, 0 45%);
+    }
+    50% {
+      clip-path: polygon(0 50%, 100% 50%, 100% 57%, 0 57%);
+    }
+    65% {
+      clip-path: polygon(0 60%, 100% 60%, 100% 60%, 0 60%);
+    }
+    75% {
+      clip-path: polygon(0 80%, 100% 80%, 100% 80%, 0 80%);
+    }
+    80% {
+      clip-path: polygon(0 40%, 100% 40%, 100% 60%, 0 60%);
+    }
+    95% {
+      clip-path: polygon(0 45%, 100% 45%, 100% 60%, 0 60%);
+    }
+    100% {
+      clip-path: polygon(0 11%, 100% 11%, 100% 15%, 0 15%);
+    }
+  }
+  
+  @keyframes glitch-anim-flash {
+    0% {
+      opacity: 0.2;
+    }
+    30%, 100% {
+      opacity: 0;
+    }
+  }
+  
+  .glitch::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 23;
+    animation: noise-animation 0.5s infinite;
+  }
+  
+  @keyframes noise-animation {
+    0% { opacity: 0.05; }
+    10% { opacity: 0.07; }
+    20% { opacity: 0.05; }
+    30% { opacity: 0.06; }
+    40% { opacity: 0.04; }
+    50% { opacity: 0.07; }
+    60% { opacity: 0.05; }
+    70% { opacity: 0.06; }
+    80% { opacity: 0.04; }
+    90% { opacity: 0.05; }
+    100% { opacity: 0.07; }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .glitch img {
+      max-height: 40vh;
+      width: 100%;
+    }
+  }
+</style>

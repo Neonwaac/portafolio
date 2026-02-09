@@ -1,0 +1,543 @@
+---
+import projectList from '../assets/projects/projects.json';
+let view = true;
+---
+
+<div class="projects-container" id="projects">
+  <div class="projects-header">
+    <div class="tech-lines"></div>
+    <h1>Proyectos</h1>
+    <div class="header-accent"></div>
+  </div>
+  
+  <div class="projects-grid">
+    {projectList.map((project) => (
+      <div class="project-card">
+        
+        <div class="project-image">
+          <img src={project.foto || "/placeholder.svg"} alt={project.nombre} loading="lazy" />
+          <div class="project-overlay">
+            <a class="view-project" href={project.url} target="_blank" aria-label={`Ver proyecto ${project.nombre}`}>
+              Ver proyecto
+              <span class="btn-glow"></span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="project-card-info">
+          <h3>{project.nombre}</h3>
+          <div class="description-wrapper">
+             <p class="description-text">{project.descripcion}</p>
+             <button class="read-more-btn">Ver más</button>
+          </div>
+          <div class="tech-stack">
+            {project.tecnologias.map((tech) => (
+              <div class="project-lt">{tech}</div>
+            ))}
+          </div>
+        </div>
+        
+        <div class="project-gh">
+          <span>Link Github</span>
+          <a target="_blank" href={project.github || "#"} aria-label={`Repositorio de GitHub para ${project.nombre}`}></a>
+        </div>
+      </div>
+    ))}
+  </div>
+  
+  <div class="tech-tag">2099</div>
+</div>
+
+<script>
+  // Importar el observer
+  import { setupProjectsObserver } from "./observer.ts";
+  
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    // Pequeño delay para asegurar que el DOM está completamente parseado
+    setTimeout(() => {
+       setupProjectsObserver();
+    }, 100);
+
+    // Restaurar efecto hover para las tecnologías
+    document.querySelectorAll('.project-lt').forEach(tag => {
+      tag.addEventListener('mouseenter', () => {
+        tag.classList.add('hover');
+      });
+      
+      tag.addEventListener('mouseleave', () => {
+        tag.classList.remove('hover');
+      });
+    });
+
+    // Lógica para "Ver más" en descripciones
+    document.querySelectorAll('.project-card').forEach(card => {
+      const text = card.querySelector('.description-text');
+      const btn = card.querySelector('.read-more-btn');
+
+      if (text && btn) {
+        // Verificar si el texto excede las 3 líneas
+        if (text.scrollHeight > text.clientHeight) {
+          (btn as HTMLElement).style.display = 'block';
+        }
+
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isExpanded = text.classList.contains('expanded');
+          
+          if (isExpanded) {
+            text.classList.remove('expanded');
+            btn.textContent = 'Ver más';
+          } else {
+            text.classList.add('expanded');
+            btn.textContent = 'Ver menos';
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.7;
+      box-shadow: 0 0 10px rgba(102, 204, 255, 0.5);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 20px rgba(230, 25, 25, 0.7);
+    }
+  }
+  
+  @keyframes cornerGlow {
+    0%, 100% {
+      border-color: rgba(230, 25, 25, 0.8);
+      box-shadow: 0 0 10px rgba(230, 25, 25, 0.5);
+    }
+    50% {
+      border-color: rgba(102, 204, 255, 0.8);
+      box-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
+    }
+  }
+  
+  @keyframes accentPulse {
+    0% { width: 0; opacity: 0.7; }
+    50% { width: 150px; opacity: 1; }
+    100% { width: 0; opacity: 0.7; }
+  }
+  
+  @keyframes techGridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 30px 30px; }
+  }
+  
+  @keyframes btnGlow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .projects-container {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 6rem 2rem;
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 20, 64, 0.9) 0%, rgba(10, 36, 114, 0.9) 100%);
+    overflow: hidden;
+  }
+  
+  .projects-header {
+    position: relative;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tech-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      repeating-linear-gradient(90deg, rgba(230, 25, 25, 0.1) 0px, rgba(230, 25, 25, 0.1) 1px, transparent 1px, transparent 20px),
+      repeating-linear-gradient(0deg, rgba(230, 25, 25, 0.1) 0px, rgba(230, 25, 25, 0.1) 1px, transparent 1px, transparent 20px);
+    opacity: 0.3;
+    z-index: 1;
+    animation: techGridMove 20s linear infinite;
+    pointer-events: none;
+  }
+  
+  .header-accent {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #e61919, #66ccff, #e61919, transparent);
+    animation: accentPulse 4s infinite ease-in-out;
+    margin-top: 10px;
+  }
+  
+  h1 {
+    width: 100%;
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 0.5rem;
+    position: relative;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #ffffff, #66ccff, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 15px rgba(102, 204, 255, 0.3);
+    z-index: 2;
+  }
+  
+  .tech-tag {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1rem;
+    color: #e61919;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(230, 25, 25, 0.8);
+    opacity: 0.7;
+    z-index: 2;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1400px;
+  }
+  
+  .project-card {
+    background: rgba(0, 10, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(102, 204, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    position: relative;
+  }
+  
+  .card-corner {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(230, 25, 25, 0.8);
+    z-index: 2;
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+  
+  .card-corner.top-left {
+    top: 5px;
+    left: 5px;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  .card-corner.top-right {
+    top: 5px;
+    right: 5px;
+    border-left: none;
+    border-bottom: none;
+  }
+  
+  .card-corner.bottom-left {
+    bottom: 5px;
+    left: 5px;
+    border-right: none;
+    border-top: none;
+  }
+  
+  .card-corner.bottom-right {
+    bottom: 5px;
+    right: 5px;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .project-card.visible {
+    opacity: 1;
+  }
+  
+  .project-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(230, 25, 25, 0.4);
+  }
+  
+  .project-card:hover .card-corner {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .project-image {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: contrast(1.1) brightness(0.9);
+  }
+  
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+  
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 10, 30, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+  
+  .view-project {
+    color: white;
+    background: linear-gradient(90deg, #e61919, #b71515);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(230, 25, 25, 0.3);
+  }
+  
+  .btn-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+  
+  .view-project:hover .btn-glow {
+    animation: btnGlow 1s infinite;
+  }
+  
+  .project-card:hover .view-project {
+    transform: translateY(0);
+  }
+  
+  .project-card-info {
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card-info h3 {
+    font-size: 1.6rem;
+    margin: 0 0 1rem 0;
+    color: white;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 10px rgba(102, 204, 255, 0.3);
+  }
+
+  .description-wrapper {
+    margin-bottom: 1.5rem;
+  }
+
+  .description-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .description-text.expanded {
+    -webkit-line-clamp: unset;
+    display: block;
+  }
+  
+  .read-more-btn {
+    background: none;
+    border: none;
+    color: #66ccff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+    padding: 0;
+    display: none; /* Se oculta por defecto, JS lo muestra si es necesario */
+    transition: color 0.3s ease;
+  }
+
+  .read-more-btn:hover {
+    color: #e61919;
+    text-decoration: underline;
+  }
+  
+  .project-card-info h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: #e61919;
+    transition: width 0.3s ease;
+  }
+  
+  .project-card:hover .project-card-info h3::after {
+    width: 100%;
+  }
+  
+  /* Eliminado bloque repetido que causaba errores */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+  }
+  
+  .project-lt {
+    background: rgba(0, 20, 64, 0.6);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid rgba(102, 204, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .project-lt.hover {
+    background: rgba(230, 25, 25, 0.2);
+    color: white;
+    transform: translateY(-3px);
+    border-color: rgba(230, 25, 25, 0.5);
+    box-shadow: 0 5px 15px rgba(230, 25, 25, 0.2);
+  }
+  
+  .project-gh {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(102, 204, 255, 0.2);
+    background: rgba(0, 10, 30, 0.4);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .project-gh span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .project-gh a {
+    width: 32px;
+    height: 32px;
+    margin-right: 40px;
+    background: url('https://img.icons8.com/ios11/512/FFFFFF/github.png') no-repeat;
+    background-size: cover;
+    transition: all 0.4s ease;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .project-gh a:hover {
+    transform: rotate(360deg) scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(230, 25, 25, 0.7));
+  }
+  
+  .project-card:hover .project-gh span {
+    color: #66ccff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .project-card {
+      min-width: unset;
+      width: 100%;
+    }
+    
+    .project-image {
+      height: 200px;
+    }
+    
+    .tech-tag {
+      bottom: 10px;
+      right: 10px;
+      font-size: 0.8rem;
+    }
+  }
+  
+  /* Animation delay for staggered entrance */
+  .project-card:nth-child(2) {
+    transition-delay: 0.1s;
+  }
+  
+  .project-card:nth-child(3) {
+    transition-delay: 0.2s;
+  }
+  
+  .project-card:nth-child(4) {
+    transition-delay: 0.3s;
+  }
+  
+  .project-card:nth-child(5) {
+    transition-delay: 0.4s;
+  }
+  
+  .project-card:nth-child(6) {
+    transition-delay: 0.5s;
+  }
+</style>

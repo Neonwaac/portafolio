@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "nombre": "c++",
+        "url": "https://i.imgur.com/pXkyuC1.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "csharp",
+        "url": "https://i.imgur.com/jGFLM7W.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "css",
+        "url": "https://i.imgur.com/rjgUPU9.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "html",
+        "url": "https://i.imgur.com/xwt3PwZ.jpeg"
+    },
+    {
+        "id": 5,
+        "nombre": "javascript",
+        "url": "https://i.imgur.com/PQAHIvn.jpeg"
+    },
+    {
+        "id": 6,
+        "nombre": "python",
+        "url": "https://i.imgur.com/rqwyzXW.jpeg"
+    },
+    {
+        "id": 7,
+        "nombre": "typescript",
+        "url": "https://i.imgur.com/x7jXAEF.jpeg"
+    },
+    {
+        "id": 1,
+        "nombre": "c++",
+        "url": "https://i.imgur.com/pXkyuC1.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "csharp",
+        "url": "https://i.imgur.com/jGFLM7W.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "css",
+        "url": "https://i.imgur.com/rjgUPU9.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "html",
+        "url": "https://i.imgur.com/xwt3PwZ.jpeg"
+    },
+    {
+        "id": 5,
+        "nombre": "javascript",
+        "url": "https://i.imgur.com/PQAHIvn.jpeg"
+    },
+    {
+        "id": 6,
+        "nombre": "python",
+        "url": "https://i.imgur.com/rqwyzXW.jpeg"
+    },
+    {
+        "id": 7,
+        "nombre": "typescript",
+        "url": "https://i.imgur.com/x7jXAEF.jpeg"
+    }
+]

@@ -1,0 +1,296 @@
+---
+import cvFile from '../assets/CV.pdf';
+---
+<div class="cv-nw">
+  <div class="cv-container">
+    <div class="cv-overlay">
+      <div class="corner top-left"></div>
+      <div class="corner top-right"></div>
+      <div class="corner bottom-left"></div>
+      <div class="corner bottom-right"></div>
+      <div class="scan-line"></div>
+    </div>
+    <img src="../src/assets/cv.webp" alt="CV Preview" />
+  </div>
+  
+  <div class="cv-actions">
+    <h5>Descarga mi CV</h5>
+    <div class="action-buttons">
+      <a href={cvFile} download="Hoja de vida - Jose Manuel Pantoja Rosas.pdf" class="action-button" aria-label="Descargar CV">
+        <img src="../src/assets/download.ico" alt="Download" />
+        <span class="tooltip">Descargar</span>
+      </a>
+      <!-- Funcionalidad de impresión simulada abriendo el PDF -->
+      <a href={cvFile} target="_blank" class="action-button" aria-label="Imprimir CV" onclick="window.open(this.href).print(); return false;">
+        <img src="../src/assets/print.ico" alt="Print" />
+        <span class="tooltip">Imprimir</span>
+      </a>
+      <a href={cvFile} target="_blank" class="action-button" aria-label="Ver CV">
+        <img src="../src/assets/see.ico" alt="View" />
+        <span class="tooltip">Ver</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes scanAnimation {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(100%);
+      opacity: 0.7;
+    }
+  }
+  
+  @keyframes cornerPulse {
+    0%, 100% {
+      border-color: rgba(230, 25, 25, 0.8);
+      box-shadow: 0 0 10px rgba(230, 25, 25, 0.5);
+    }
+    50% {
+      border-color: rgba(102, 204, 255, 0.8);
+      box-shadow: 0 0 15px rgba(102, 204, 255, 0.5);
+    }
+  }
+  
+  @keyframes buttonHover {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-3px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .cv-nw {
+    width: 25%;
+    min-width: 350px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    transform: perspective(1000px) rotateY(-5deg);
+    transition: transform 0.5s ease;
+    
+    &:hover {
+      transform: perspective(1000px) rotateY(0deg);
+      
+      .scan-line {
+        opacity: 1;
+      }
+      
+      .corner {
+        animation: cornerPulse 2s infinite ease-in-out;
+      }
+    }
+  }
+  
+  .cv-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    
+    img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+      filter: contrast(1.1) brightness(0.9);
+      
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+  
+  .cv-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    
+    &::after {
+      content: "2099";
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      font-size: 14px;
+      color: rgba(230, 25, 25, 0.7);
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(230, 25, 25, 0.5);
+      opacity: 0.7;
+    }
+  }
+  
+  .corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(230, 25, 25, 0.8);
+    box-shadow: 0 0 10px rgba(230, 25, 25, 0.5);
+    
+    &.top-left {
+      top: 10px;
+      left: 10px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    &.top-right {
+      top: 10px;
+      right: 10px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    &.bottom-left {
+      bottom: 10px;
+      left: 10px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    &.bottom-right {
+      bottom: 10px;
+      right: 10px;
+      border-left: none;
+      border-top: none;
+    }
+  }
+  
+  .scan-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, rgba(102, 204, 255, 0.8), transparent);
+    box-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
+    animation: scanAnimation 3s linear infinite;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  
+  .cv-actions {
+    width: 100%;
+    background: linear-gradient(to right, #001440, #0a2472, #001440);
+    display: flex;
+    padding: 12px 20px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e61919, transparent);
+    }
+    
+    h5 {
+      color: white;
+      font-size: 20px;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 5px rgba(102, 204, 255, 0.5);
+      background: linear-gradient(90deg, #ffffff, #66ccff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .action-button {
+      position: relative;
+      cursor: pointer;
+      
+      &:hover {
+        img {
+          transform: scale(1.2);
+          filter: drop-shadow(0 0 5px rgba(230, 25, 25, 0.8));
+          animation: buttonHover 1s infinite ease-in-out;
+        }
+        
+        .tooltip {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      img {
+        width: 28px;
+        height: 28px;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 0 3px rgba(102, 204, 255, 0.5));
+      }
+      
+      .tooltip {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(5px);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        
+        &::before {
+          content: "";
+          position: absolute;
+          top: -5px;
+          left: 50%;
+          transform: translateX(-50%);
+          border-left: 5px solid transparent;
+          border-right: 5px solid transparent;
+          border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cv-nw {
+      min-width: 300px;
+    }
+    
+    .cv-actions {
+      padding: 10px 15px;
+      
+      h5 {
+        font-size: 16px;
+      }
+      
+      .action-button img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+</style>

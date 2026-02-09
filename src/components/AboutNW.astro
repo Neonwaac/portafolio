@@ -1,0 +1,312 @@
+<div class="about-nw">
+  <div class="about-nw-card title">
+    <div class="tech-lines"></div>
+    <h3>Quién es Jose Manuel</h3>
+  </div>
+  
+  <div class="about-nw-card">
+    <div class="card-content">
+      <p>
+        Un desarrollador fullstack de 20 años con enfasis en el desarrollo y diseño web
+      </p>
+      <div class="icon-container">
+        <img src="../src/assets/frontend.ico" alt="Frontend" />
+        <div class="icon-glow"></div>
+      </div>
+    </div>
+    <div class="card-highlight"></div>
+  </div>
+  
+  <div class="about-nw-card">
+    <div class="card-content">
+      <p>
+        Gran conocimiento creando diseños visualmente impresionantes e innovadores que fusionan
+        un gran estilo con funcionalidad.
+      </p>
+      <div class="icon-container">
+        <img src="../src/assets/innovative.ico" alt="Innovative" />
+        <div class="icon-glow"></div>
+      </div>
+    </div>
+    <div class="card-highlight"></div>
+  </div>
+  
+  <div class="about-nw-card">
+    <div class="card-content">
+      <p>
+        Posee certificaciones en Tecnología de Desarrollo de Software.
+      </p>
+      <div class="icon-container">
+        <img src="../src/assets/certificate.ico" alt="Certificate" />
+        <div class="icon-glow"></div>
+      </div>
+    </div>
+    <div class="card-highlight"></div>
+  </div>
+  
+  <div class="about-nw-card">
+    <div class="card-content">
+      <p>
+        Demostrando experiencia técnica como un profundo conocimiento de los principios de desarrollo de software.
+      </p>
+      <div class="icon-container">
+        <img src="../src/assets/technical.ico" alt="Technical" />
+        <div class="icon-glow"></div>
+      </div>
+    </div>
+    <div class="card-highlight"></div>
+  </div>
+</div>
+
+<style>
+  @keyframes scanline {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0.7;
+      box-shadow: 0 0 5px rgba(102, 204, 255, 0.5);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 15px rgba(102, 204, 255, 0.8);
+    }
+    100% {
+      opacity: 0.7;
+      box-shadow: 0 0 5px rgba(102, 204, 255, 0.5);
+    }
+  }
+  
+  @keyframes borderFlash {
+    0%, 100% {
+      border-color: rgba(230, 25, 25, 0.6);
+    }
+    50% {
+      border-color: rgba(102, 204, 255, 0.8);
+    }
+  }
+  
+  .about-nw {
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-width: 350px;
+    position: relative;
+  }
+  
+  .about-nw-card {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: rgba(1, 10, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      
+      .card-highlight {
+        opacity: 1;
+      }
+      
+      .icon-glow {
+        animation: pulse 2s infinite ease-in-out;
+      }
+    }
+    
+    .card-content {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 15px 0;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .card-highlight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(230, 25, 25, 0.05) 0%, rgba(102, 204, 255, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+    
+    h3 {
+      width: 100%;
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 0;
+      padding: 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffffff, #66ccff, #ffffff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 5px rgba(102, 204, 255, 0.3);
+    }
+    
+    p {
+      width: 85%;
+      padding: 0 20px;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.5;
+      position: relative;
+      
+      &::first-letter {
+        color: #e61919;
+        font-size: 1.5em;
+        font-weight: bold;
+        text-shadow: 0 0 5px rgba(230, 25, 25, 0.5);
+      }
+    }
+    
+    .icon-container {
+      width: 15%;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      margin-right: 10px;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 0 3px var(--nw-color-rojo));
+    }
+    
+    .icon-glow {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(230, 25, 25, 0.3) 0%, rgba(102, 204, 255, 0.2) 50%, transparent 70%);
+      filter: blur(5px);
+      z-index: 1;
+      margin-right: 10px;
+    }
+  }
+  
+  .title {
+    background: linear-gradient(to right, #001440, #0a2472, #001440);
+    text-align: center;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #e61919, transparent);
+    }
+    
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #e61919, transparent);
+    }
+    
+    .tech-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(90deg, rgba(102, 204, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(102, 204, 255, 0.1) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: 1;
+      opacity: 0.3;
+    }
+    
+    h3 {
+      position: relative;
+      z-index: 2;
+    }
+  }
+  
+  .about-nw-card:not(.title) {
+    border-left: 3px solid rgba(230, 25, 25, 0.6);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: borderFlash 4s infinite ease-in-out;
+    
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(transparent, rgba(102, 204, 255, 0.05));
+      opacity: 0.2;
+      pointer-events: none;
+    }
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      animation: scanline 2s linear infinite;
+      z-index: 1;
+      opacity: 0.3;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .about-nw {
+      min-width: 300px;
+    }
+    
+    .about-nw-card {
+      p {
+        font-size: 1rem;
+        padding: 0 10px;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+      
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+</style>

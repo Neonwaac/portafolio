@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "nombre": "astro",
+        "url": "https://i.imgur.com/ZSn5N71.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "laravel",
+        "url": "https://i.imgur.com/Z6SoQBd.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "mysql",
+        "url": "https://i.imgur.com/8aHhgVe.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "next",
+        "url": "https://i.imgur.com/8wbHYfw.jpeg"
+    },
+    {
+        "id": 5,
+        "nombre": "node",
+        "url": "https://i.imgur.com/flETEDk.jpeg"
+    },
+    {
+        "id": 6,
+        "nombre": "react",
+        "url": "https://i.imgur.com/eCsjgxj.jpeg"
+    },
+    {
+        "id": 7,
+        "nombre": "unity",
+        "url": "https://i.imgur.com/LSdbpp4.jpeg"
+    },
+    {
+        "id": 1,
+        "nombre": "astro",
+        "url": "https://i.imgur.com/ZSn5N71.jpeg"
+    },
+    {
+        "id": 2,
+        "nombre": "laravel",
+        "url": "https://i.imgur.com/Z6SoQBd.jpeg"
+    },
+    {
+        "id": 3,
+        "nombre": "mysql",
+        "url": "https://i.imgur.com/8aHhgVe.jpeg"
+    },
+    {
+        "id": 4,
+        "nombre": "next",
+        "url": "https://i.imgur.com/8wbHYfw.jpeg"
+    },
+    {
+        "id": 5,
+        "nombre": "node",
+        "url": "https://i.imgur.com/flETEDk.jpeg"
+    },
+    {
+        "id": 6,
+        "nombre": "react",
+        "url": "https://i.imgur.com/eCsjgxj.jpeg"
+    },
+    {
+        "id": 7,
+        "nombre": "unity",
+        "url": "https://i.imgur.com/LSdbpp4.jpeg"
+    }
+]
